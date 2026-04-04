@@ -5,7 +5,7 @@ A modern, responsive, client-side product management dashboard built with Next.j
 ## 🚀 Features
 
 * **Full CRUD Functionality:** Add, edit, view, and delete products.
-* **Advanced Data Pipeline:** Real-time search, sorting (by name or price), and pagination.
+* **Advanced Data Pipeline:** Real-time search, sorting (by name or price).
 * **Bulk Actions:** Select multiple items to delete them simultaneously.
 * **Image Uploads:** Upload local images, which are converted to Base64 and stored directly in the browser.
 * **Real-time Analytics:** Top-level cards displaying Total Products, Items Missing Images, and the Highest Price in the catalog.
