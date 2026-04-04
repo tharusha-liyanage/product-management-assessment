@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,16 +31,37 @@ export default function EditProduct({ product, onUpdate }: EditProductProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Send the updated data back to our custom hook
+    // --- 1. FORM VALIDATION ---
+    if (!name.trim()) {
+      toast.error("Product name cannot be empty.");
+      return; 
+    }
+
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
+      toast.error("Please enter a valid price greater than $0.");
+      return;
+    }
+
+    if (!description.trim()) {
+      toast.error("Product description cannot be empty.");
+      return;
+    }
+
+    // --- 2. SEND THE UPDATED DATA ---
     onUpdate({
-      ...product, // We keep the original ID
-      name,
-      price: parseFloat(price),
-      description,
-      imageUrl,
+      ...product, // This is crucial: It keeps the original ID attached!
+      name: name.trim(),
+      price: parsedPrice,
+      description: description.trim(),
+      imageUrl: imageUrl.trim(),
     });
     
-    setOpen(false); // Close the modal
+    // --- 3. SUCCESS NOTIFICATION ---
+    toast.success("Product updated successfully!");
+    
+    // --- 4. CLOSE MODAL ---
+    setOpen(false); 
   };
 
   return (
