@@ -30,19 +30,19 @@ A modern, responsive, client-side product management dashboard built with Next.j
 To run this project locally on your machine, follow these steps:
 
 **1. Clone the repository**
-\`\`\`bash
-git clone <your-repository-url>
-cd <your-project-folder>
+\`\`\`
+git clone **your-repository-url**
+cd **your-project-folder**
 \`\`\`
 
 **2. Install dependencies**
 Make sure you have Node.js installed. Then run:
-\`\`\`bash
+\`\`\`
 npm install
 \`\`\`
 
 **3. Run the development server**
-\`\`\`bash
+\`\`\`
 npm run dev
 \`\`\`
 
