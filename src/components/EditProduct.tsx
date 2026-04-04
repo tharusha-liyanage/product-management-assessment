@@ -14,46 +14,45 @@ import {
 } from "@/components/ui/dialog";
 import { Product } from "@/types";
 
-interface AddProductProps {
-  onAdd: (product: Omit<Product, "id">) => void;
+interface EditProductProps {
+  product: Product;
+  onUpdate: (product: Product) => void;
 }
 
-export default function AddProduct({ onAdd }: AddProductProps) {
+export default function EditProduct({ product, onUpdate }: EditProductProps) {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  
+  // We initialize the state with the product's existing data!
+  const [name, setName] = useState(product.name);
+  const [price, setPrice] = useState(product.price.toString());
+  const [description, setDescription] = useState(product.description);
+  const [imageUrl, setImageUrl] = useState(product.imageUrl || "");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Send the data back to our custom hook
-    onAdd({
+    // Send the updated data back to our custom hook
+    onUpdate({
+      ...product, // We keep the original ID
       name,
       price: parseFloat(price),
       description,
       imageUrl,
     });
     
-    // Clear the form and close the modal
-    setName("");
-    setPrice("");
-    setDescription("");
-    setImageUrl("");
-    setOpen(false);
+    setOpen(false); // Close the modal
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">Add New Product</Button>
+        <Button variant="outline" size="sm">Edit</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add a New Product</DialogTitle>
+          <DialogTitle>Edit Product</DialogTitle>
           <DialogDescription>
-            Fill out the form below to add a new product to your store.
+            Make changes to your product here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
@@ -83,7 +82,7 @@ export default function AddProduct({ onAdd }: AddProductProps) {
             value={imageUrl} 
             onChange={(e) => setImageUrl(e.target.value)} 
           />
-          <Button type="submit" className="w-full mt-2">Save Product</Button>
+          <Button type="submit" className="w-full mt-2">Save Changes</Button>
         </form>
       </DialogContent>
     </Dialog>

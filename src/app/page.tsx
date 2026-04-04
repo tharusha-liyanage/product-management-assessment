@@ -2,26 +2,30 @@
 
 import { useProducts } from "@/hooks/useProducts";
 import AddProduct from "@/components/AddProduct";
+import ProductTable from "@/components/ProductTable";
 
 export default function Home() {
-  const { products, addProduct, isLoaded } = useProducts();
+  // <-- 1. Grab 'updateProduct' from the hook!
+  const { products, addProduct, deleteProduct, updateProduct, isLoaded } = useProducts();
 
-  // Prevents the page from flashing before Local Storage loads
   if (!isLoaded) return null; 
 
   return (
     <main className="container mx-auto p-8 max-w-5xl">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Product Management</h1>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Product Management</h1>
+          <p className="text-slate-500 mt-1">Manage your inventory and pricing.</p>
+        </div>
         
-        {/* Our new Add Product component! */}
         <AddProduct onAdd={addProduct} />
       </div>
 
-      {/* We will add the table here next! */}
-      <div className="bg-slate-50 border border-slate-200 rounded-lg p-8 text-center text-slate-500">
-        You have {products.length} products saved.
-      </div>
+      <ProductTable 
+        products={products} 
+        onDelete={deleteProduct} 
+        onUpdate={updateProduct} // <-- 2. Pass it into the Table!
+      />
       
     </main>
   );
