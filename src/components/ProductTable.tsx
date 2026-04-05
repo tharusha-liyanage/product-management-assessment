@@ -322,6 +322,7 @@ export default function ProductTable({ products, onDelete, onUpdate, onBulkDelet
                   <DialogContent className="w-[90vw] rounded-xl">
                     <DialogHeader>
                       <DialogTitle>Product Details</DialogTitle>
+                      <DialogDescription className="hidden">Full information for this item.</DialogDescription>
                     </DialogHeader>
                     <div className="mt-2 flex flex-col gap-4">
                       {/* Large Image Preview (Mobile Fix) */}
