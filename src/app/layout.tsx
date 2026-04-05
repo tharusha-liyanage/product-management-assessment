@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Product Management Dashboard",
   description: "Manage your inventory and pricing.",
+  icons: {
+    icon: "/icon.jpg",
+    shortcut: "/icon.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +35,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" href="/icon.jpg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/icon.jpg" type="image/jpeg" />
+      </head>
       <body className="min-h-full flex flex-col">
         
         {/* 2. Wrapped your app and toaster inside the ThemeProvider */}
